@@ -31,7 +31,6 @@ QStringList extractBlocksEx(QString &source)
 
     source.replace(RX_MAIN, BLOCK_MARK);
 
-
     return result;
 
 }   /* extractBlocks */
@@ -52,7 +51,7 @@ QStringList getSectionIds(QString section)
 
         if (!currPart.isEmpty() )
         {
-            result.append(currPart.split(',') );
+            result.append(currPart.split(COMMA) );
         }
     }
 
@@ -65,7 +64,7 @@ void countGlobalVars(QString &source, uint &practical, uint &available)
 {
     practical = available = 0;
 
-    QStringList blox = extractBlocksEx(source);
+    QStringList blocks = extractBlocksEx(source);
     QRegularExpressionMatchIterator varSectionsIter = RX_VAR_SECTION.globalMatch(source);
 
     QString currSection;
@@ -90,7 +89,7 @@ void countGlobalVars(QString &source, uint &practical, uint &available)
 
             available += count * ids.count();
 
-            foreach(QString b, blox)
+            foreach(QString b, blocks)
             {
                 QRegularExpressionMatchIterator blockIter = makeListRegExp(ids).globalMatch(b);
                 while (blockIter.hasNext() )
@@ -99,10 +98,7 @@ void countGlobalVars(QString &source, uint &practical, uint &available)
                     blockIter.next();
                 }
             }   // blocks
-
-        }   // var-sections
-
-    }   // source
-
+        }
+    }   // var-sections
 
 }   /* countGlobalVars */

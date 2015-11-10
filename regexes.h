@@ -19,7 +19,7 @@ NEW_CONST_REG(RX_STRING_LITERALS, "'([^']+|'')*'");
 
 
 NEW_CONST_REG(RX_SINGLELINE_COMMENTS, "\\/\\/.*");
-NEW_CONST_REG_PARAMS(RX_MULTILINE_COMMENTS, "{.*?}|\\(\\*.*?\\*\\)", DOT_ALL );
+NEW_CONST_REG_PARAMS(RX_MULTILINE_COMMENTS, "{.*?}|\\(\\*.*?\\*\\)", DOT_ALL);
 
 
 NEW_CONST_REG(RX_FORWARD_DECL,"(\\bprocedure\\b|\\bfunction\\b)\\s*[\\w]+\\s*"\
@@ -81,8 +81,9 @@ const uint VAR_CONST_IDENTIFIERS_GROUP = 1;
 #define BLOCK_MARK "\n\nprocedure ___\n\n"
 NEW_CONST_REG(RX_BLOCK_MARK, BLOCK_MARK);
 
+#define COMMA ','
 // ->
 
-const QRegularExpression makeListRegExp(QStringList list);
+ConstRegExp makeListRegExp(QStringList list);
 
 #endif // REGEXES_H_
