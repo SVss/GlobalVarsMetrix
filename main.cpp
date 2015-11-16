@@ -13,8 +13,9 @@ int main(int argc, char *argv[])
 
     if (source.isEmpty() )
     {
-        printf("File not found!");
+        printf("File not found or empty!");
         system("pause");
+
         return 0;
     }
 
@@ -26,11 +27,22 @@ int main(int argc, char *argv[])
     countGlobalVars(source, practicalGlobalCalls, availableGlobalCalls);
 
 
-    result += QString("\n[Aup/Pup]: %1/%2\n\nRup = %3").
-            arg(practicalGlobalCalls).arg(availableGlobalCalls).
-            arg(QString::number( (float)practicalGlobalCalls/availableGlobalCalls, 'g', 10) );
+    result += QString("\n[Aup/Pup]: %1/%2\n\n").arg(practicalGlobalCalls).arg(availableGlobalCalls);
+    result += "Rup = ";
+
+    if (availableGlobalCalls != 0)
+    {
+        result += (QString::number( (float)practicalGlobalCalls/availableGlobalCalls, 'g', 10) );
+    }
+    else
+    {
+        result += "N/A";
+    }
+
+    result += "\n\n";
 
     writeResult(result, "output.txt");
     system("pause");
+
     return 0;
 }
