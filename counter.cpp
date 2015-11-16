@@ -60,11 +60,13 @@ QStringList getSectionIds(QString section)
 }   /* getSectionIds */
 
 
-void countGlobalVars(QString &source, uint &practical, uint &available)
+void countGlobalVars(QString &source, uint &practical, uint &available, uint &blocksCount, uint &varsCount)
 {
-    practical = available = 0;
+    practical = available = blocksCount = varsCount = 0;
 
     QStringList blocks = extractBlocksEx(source);
+    blocksCount = blocks.count();
+
     QRegularExpressionMatchIterator varSectionsIter = RX_VAR_SECTION.globalMatch(source);
 
     QString currSection;
@@ -76,6 +78,7 @@ void countGlobalVars(QString &source, uint &practical, uint &available)
         if (!currSection.isEmpty() )
         {
             QStringList ids = getSectionIds(currSection);
+            varsCount += ids.count();
 
             long long pos = currMatch.capturedStart(VAR_SECTION_GROUP);
             QRegularExpressionMatchIterator currModuleIter = RX_BLOCK_MARK.globalMatch(source, pos);

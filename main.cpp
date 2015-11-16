@@ -22,10 +22,13 @@ int main(int argc, char *argv[])
     cleanSource(source);
 
     uint    practicalGlobalCalls = 0,  // Aup
-            availableGlobalCalls = 0;   // Pup
+            availableGlobalCalls = 0,   // Pup
+            blocksCount = 0,
+            varsCount = 0;
 
-    countGlobalVars(source, practicalGlobalCalls, availableGlobalCalls);
+    countGlobalVars(source, practicalGlobalCalls, availableGlobalCalls, blocksCount, varsCount);
 
+    result += QString("\nVariables: %1\nBlocks: %2\n\n").arg(varsCount).arg(blocksCount);
 
     result += QString("\n[Aup/Pup]: %1/%2\n\n").arg(practicalGlobalCalls).arg(availableGlobalCalls);
     result += "Rup = ";

@@ -8,7 +8,7 @@ extern const QString BLOCK_MARK;
 void cleanSource(QString &source);
 QString cleanBlock(QString &block);
 
-void countGlobalVars(QString &source, uint &practical, uint &available);
+void countGlobalVars(QString &source, uint &practical, uint &available, uint &blocksCount, uint &varsCount);
 
 #endif // STUFF_H_
 
